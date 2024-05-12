@@ -3,6 +3,8 @@ import Layout from "../Layout/Layout";
 import { useAuth } from "../Auth/AuthProvider";
 import { Navigate } from "react-router-dom";
 import { API_URL } from "../Auth/constant";
+import {toast} from 'react-toastify'
+
 
 const SignUp = () => {
 
@@ -15,7 +17,7 @@ const SignUp = () => {
     const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => { 
         e.preventDefault();
         try {
-            const response = await fetch(`${API_URL}/signup`, {
+            const response = await toast.promise(fetch(`${API_URL}/signup`, {
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",
@@ -25,12 +27,16 @@ const SignUp = () => {
                     userName,
                     password
                 })
-            })
+            }),{
+                pending: 'Handle your data...',
+                success: 'User Created! 👌',
+                error: 'Something went wrong, try later... 🤯'
+              }) 
 
             if(response.ok){
                 console.log('User Created');
             }else{
-                console.log('Something went wrong');
+                console.log('');
             }
         } catch (error) {
             console.log(`Error at handleSubmit ${error}`);

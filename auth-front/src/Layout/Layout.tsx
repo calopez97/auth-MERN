@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 interface LayoutProps{
     children:React.ReactNode,
 }
 
 const Layout = ({children}:LayoutProps) => {
+
   return (
     <>
         <header>
@@ -22,6 +26,7 @@ const Layout = ({children}:LayoutProps) => {
 
         <main>
             {children}
+            <ToastContainer />
         </main>
     </>
   )
